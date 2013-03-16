@@ -2,18 +2,14 @@
 /**
  * CommandLine class
  *
- * @package             Framework
- */
-/**
  * Command Line Interface (CLI) utility class.
  *
  * @author              Patrick Fisher <patrick@pwfisher.com>
  * @since               August 21, 2009
- * @package             Framework
- * @subpackage          Env
+ * @see                 https://github.com/pwfisher/CommandLine.php
  */
-class CommandLine {
-
+class CommandLine
+{
     public static $args;
 
     /**
@@ -53,79 +49,100 @@ class CommandLine {
      *
      * @author              Patrick Fisher <patrick@pwfisher.com>
      * @since               August 21, 2009
+     * @see                 https://github.com/pwfisher/CommandLine.php
      * @see                 http://www.php.net/manual/en/features.commandline.php
      *                      #81042 function arguments($argv) by technorati at gmail dot com, 12-Feb-2008
      *                      #78651 function getArgs($args) by B Crawford, 22-Oct-2007
      * @usage               $args = CommandLine::parseArgs($_SERVER['argv']);
      */
-    public static function parseArgs($argv){
-
+    public static function parseArgs($argv)
+    {
         array_shift($argv);
         $out                            = array();
 
-        foreach ($argv as $arg){
-
+        foreach ($argv as $arg)
+        {
             // --foo --bar=baz
-            if (substr($arg,0,2) == '--'){
-                $eqPos                  = strpos($arg,'=');
+            if (substr($arg, 0, 2) === '--')
+            {
+                $eqPos                  = strpos($arg, '=');
 
                 // --foo
-                if ($eqPos === false){
-                    $key                = substr($arg,2);
+                if ($eqPos === false)
+                {
+                    $key                = substr($arg, 2);
                     $value              = isset($out[$key]) ? $out[$key] : true;
                     $out[$key]          = $value;
                 }
+
                 // --bar=baz
-                else {
-                    $key                = substr($arg,2,$eqPos-2);
-                    $value              = substr($arg,$eqPos+1);
+                else
+                {
+                    $key                = substr($arg, 2, $eqPos - 2);
+                    $value              = substr($arg, $eqPos + 1);
                     $out[$key]          = $value;
                 }
             }
-            // -k=value -abc
-            else if (substr($arg,0,1) == '-'){
 
+            // -k=value -abc
+            else if (substr($arg, 0, 1) === '-')
+            {
                 // -k=value
-                if (substr($arg,2,1) == '='){
-                    $key                = substr($arg,1,1);
-                    $value              = substr($arg,3);
+                if (substr($arg, 2, 1) === '=')
+                {
+                    $key                = substr($arg, 1, 1);
+                    $value              = substr($arg, 3);
                     $out[$key]          = $value;
                 }
                 // -abc
-                else {
-                    $chars              = str_split(substr($arg,1));
-                    foreach ($chars as $char){
+                else
+                {
+                    $chars              = str_split(substr($arg, 1));
+                    foreach ($chars as $char)
+                    {
                         $key            = $char;
                         $value          = isset($out[$key]) ? $out[$key] : true;
                         $out[$key]      = $value;
                     }
                 }
             }
+
             // plain-arg
-            else {
+            else
+            {
                 $value                  = $arg;
                 $out[]                  = $value;
             }
         }
+
         self::$args                     = $out;
+
         return $out;
     }
 
     /**
      * GET BOOLEAN
      */
-    public static function getBoolean($key, $default = false){
-        if (!isset(self::$args[$key])){
+    public static function getBoolean($key, $default = false)
+    {
+        if (!isset(self::$args[$key]))
+        {
             return $default;
         }
         $value                          = self::$args[$key];
-        if (is_bool($value)){
+
+        if (is_bool($value))
+        {
             return $value;
         }
-        if (is_int($value)){
+
+        if (is_int($value))
+        {
             return (bool)$value;
         }
-        if (is_string($value)){
+
+        if (is_string($value))
+        {
             $value                      = strtolower($value);
             $map = array(
                 'y'                     => true,
@@ -139,10 +156,12 @@ class CommandLine {
                 'on'                    => true,
                 'off'                   => false,
             );
-            if (isset($map[$value])){
+            if (isset($map[$value]))
+            {
                 return $map[$value];
             }
         }
+
         return $default;
     }
 }

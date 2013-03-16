@@ -47,3 +47,6 @@ of options (switches, flags and arguments) and returns a simple array.
 * http://www.php.net/manual/en/features.commandline.php
 * comment #81042 function arguments($argv) by technorati at gmail dot com, 12-Feb-2008
 * comment #78651 function getArgs($args) by B Crawford, 22-Oct-2007
+
+Note: parseArgs.php contains a "minified" version of the same code, for your copypasta pleasure.
+For little scripts for which you want to have a nice interface.
