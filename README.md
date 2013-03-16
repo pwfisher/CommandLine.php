@@ -8,7 +8,7 @@ PHP Command Line interface class. Provides friendly and flexible CLI argument pa
 This command line option parser supports any combination of three types
 of options (switches, flags and arguments) and returns a simple array.
 
-[pfisher ~]$ php test.php --foo --bar=baz
+`[pfisher ~]$ php test.php --foo --bar=baz
   ["foo"]   => true
   ["bar"]   => "baz"
 
@@ -35,7 +35,7 @@ of options (switches, flags and arguments) and returns a simple array.
   ["c"]     => true
   ["k"]     => "value"
   [2]       => "plain arg 3"
-  ["s"]     => "overwrite"
+  ["s"]     => "overwrite"`
 
 @author              Patrick Fisher <patrick@pwfisher.com>
 @since               August 21, 2009
