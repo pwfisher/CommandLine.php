@@ -5,9 +5,8 @@
  * @author              Patrick Fisher <patrick@pwfisher.com>
  * @source              https://github.com/pwfisher/CommandLine.php
  */
-function parseArgs($argv)
-{
-    array_shift($argv); $o = array();
+function parseArgs($argv = null) {
+    $argv = $argv ? $argv : $_SERVER['argv']; array_shift($argv); $o = array();
     foreach ($argv as $a) {
         if (substr($a, 0, 2) == '--') { $eq = strpos($a, '=');
             if ($eq !== false) { $o[substr($a, 2, $eq - 2)] = substr($a, $eq + 1); }
