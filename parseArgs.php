@@ -1,9 +1,9 @@
 <?php
 /**
  * parseArgs Command Line Interface (CLI) utility function.
- * @usage               $args = CommandLine::parseArgs($_SERVER['argv']);
+ * @usage               $args = parseArgs($_SERVER['argv']);
  * @author              Patrick Fisher <patrick@pwfisher.com>
- * @see                 github.com/pwfisher/CommandLine.php
+ * @source              https://github.com/pwfisher/CommandLine.php
  */
 function parseArgs($argv) {
     array_shift($argv); $o = array();
