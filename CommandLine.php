@@ -58,11 +58,14 @@ class CommandLine
     public static function parseArgs($argv = null)
     {
         $argv                           = $argv ? $argv : $_SERVER['argv'];
+
         array_shift($argv);
         $out                            = array();
 
-        foreach ($argv as $arg)
+        for ($i = 0, $j = count($argv); $i < $j; $i++)
         {
+            $arg                        = $argv[$i];
+
             // --foo --bar=baz
             if (substr($arg, 0, 2) === '--')
             {
@@ -72,7 +75,17 @@ class CommandLine
                 if ($eqPos === false)
                 {
                     $key                = substr($arg, 2);
-                    $value              = isset($out[$key]) ? $out[$key] : true;
+
+                    // --foo value
+                    if ($i + 1 < $j && $argv[$i + 1][0] !== '-')
+                    {
+                        $value          = $argv[$i + 1];
+                        $i++;
+                    }
+                    else
+                    {
+                        $value          = isset($out[$key]) ? $out[$key] : true;
+                    }
                     $out[$key]          = $value;
                 }
 
@@ -104,6 +117,12 @@ class CommandLine
                         $key            = $char;
                         $value          = isset($out[$key]) ? $out[$key] : true;
                         $out[$key]      = $value;
+                    }
+                    // -a value1 -abc value2
+                    if ($i + 1 < $j && $argv[$i + 1][0] !== '-')
+                    {
+                        $out[$key]      = $argv[$i + 1];
+                        $i++;
                     }
                 }
             }
