@@ -10,14 +10,15 @@ PHP Command Line interface class. Provides friendly and flexible CLI argument pa
 This command line option parser supports any combination of three types
 of options (switches, flags and arguments) and returns a simple array.
 
-    [pfisher ~]$ php test.php --foo --bar=baz
+    [pfisher ~]$ php test.php --foo --bar=baz --spam eggs
       ["foo"]   => true
       ["bar"]   => "baz"
+      ["spam"]  => "eggs"
 
-    [pfisher ~]$ php test.php -abc
+    [pfisher ~]$ php test.php -abc foo
       ["a"]     => true
       ["b"]     => true
-      ["c"]     => true
+      ["c"]     => "foo"
 
     [pfisher ~]$ php test.php arg1 arg2 arg3
       [0]       => "arg1"
