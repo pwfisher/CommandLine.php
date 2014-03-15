@@ -7,8 +7,10 @@ PHP Command Line interface class. Provides friendly and flexible CLI argument pa
 
     $args = CommandLine::parseArgs($_SERVER['argv']);
 
-This command line option parser supports any combination of three types
-of options (switches, flags and arguments) and returns a simple array.
+This command line option parser supports any combination of three types of options
+[single character options (`-a -b` or `-ab` or `-c -d=dog` or `-cd dog`),
+long options (`--foo` or `--bar=baz` or `--bar baz`)
+and arguments (`arg1 arg2`)] and returns a simple array.
 
     [pfisher ~]$ php test.php --foo --bar=baz --spam eggs
       ["foo"]   => true
@@ -39,6 +41,8 @@ of options (switches, flags and arguments) and returns a simple array.
       ["k"]     => "value"
       [2]       => "plain arg 3"
       ["s"]     => "overwrite"
+
+Not supported: `-cd=dog`.
 
 @author              Patrick Fisher <patrick@pwfisher.com>
 
