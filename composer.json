@@ -1,0 +1,19 @@
+{
+	"name": "pwfisher/command-line-php",
+	"type": "library",
+	"description": "PHP Command Line interface class. Provides friendly and flexible CLI argument parsing.",
+	"keywords": ["cli", "parsing", "parser"],
+	"license": ["CC-BY-3.0"],
+	"authors": [
+		{
+			"name": "Patrick Fisher",
+			"email": "patrick@pwfisher.com"
+		}
+	],
+	"require": {
+		"php": ">=5.3.0"
+	},
+	"autoload": {
+		"classmap": ["CommandLine.php"]
+	}
+}
