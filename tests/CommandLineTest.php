@@ -113,6 +113,30 @@ class ParserTest extends PHPUnit_Framework_TestCase
     }
 
     /** @test */
+    public function singleFlagWithDashInNameAnInValue()
+    {
+        $result = CommandLine::parseArgs(array(self::FILE, '--include-path=my-value'));
+        $this->assertEquals(1, count($result));
+        $this->assertEquals('my-value', $result['include-path']);
+    }
+
+    /** @test */
+    public function singleFlagWithEqualsSignInValue()
+    {
+        $result = CommandLine::parseArgs(array(self::FILE, '--funny=spam=eggs'));
+        $this->assertEquals(1, count($result));
+        $this->assertEquals('spam=eggs', $result['funny']);
+    }
+
+    /** @test */
+    public function singleFlagWithDashInNameAndEqualsSignInValue()
+    {
+        $result = CommandLine::parseArgs(array(self::FILE, '--also-funny=spam=eggs'));
+        $this->assertEquals(1, count($result));
+        $this->assertEquals('spam=eggs', $result['also-funny']);
+    }
+
+    /** @test */
     public function singleFlagWithValueWithoutEquation ()
     {
         $result = CommandLine::parseArgs(array(self::FILE, '--a', 'b'));
