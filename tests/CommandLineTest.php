@@ -40,7 +40,7 @@ class ParserTest extends PHPUnit_Framework_TestCase
     }
 
     /** @test */
-    public function singleSwith()
+    public function singleSwitch()
     {
         $result = CommandLine::parseArgs(array(self::FILE, '-a'));
         $this->assertEquals(1, count($result));
@@ -48,15 +48,7 @@ class ParserTest extends PHPUnit_Framework_TestCase
     }
 
     /** @test */
-    public function singleSwithWithValue()
-    {
-        $result = CommandLine::parseArgs(array(self::FILE, '-a'));
-        $this->assertEquals(1, count($result));
-        $this->assertTrue($result['a']);
-    }
-
-    /** @test */
-    public function multiSwith()
+    public function singleSwitchWithValue()
     {
         $result = CommandLine::parseArgs(array(self::FILE, '-a=b'));
         $this->assertEquals(1, count($result));
@@ -64,7 +56,16 @@ class ParserTest extends PHPUnit_Framework_TestCase
     }
 
     /** @test */
-    public function multiSwithAsOne()
+    public function multiSwitch()
+    {
+        $result = CommandLine::parseArgs(array(self::FILE, '-a', '-b'));
+        $this->assertEquals(2, count($result));
+        $this->assertTrue($result['a']);
+        $this->assertTrue($result['b']);
+    }
+
+    /** @test */
+    public function multiSwitchAsOne()
     {
         $result = CommandLine::parseArgs(array(self::FILE, '-ab'));
         $this->assertEquals(2, count($result));
@@ -113,7 +114,7 @@ class ParserTest extends PHPUnit_Framework_TestCase
     }
 
     /** @test */
-    public function singleFlagWithDashInNameAnInValue()
+    public function singleFlagWithDashInNameAndInValue()
     {
         $result = CommandLine::parseArgs(array(self::FILE, '--include-path=my-value'));
         $this->assertEquals(1, count($result));
@@ -145,7 +146,7 @@ class ParserTest extends PHPUnit_Framework_TestCase
     }
 
     /** @test */
-    public function multiSwithAsOneWithValue()
+    public function multiSwitchAsOneWithValue()
     {
         $result = CommandLine::parseArgs(array(self::FILE, '-ab', 'value'));
         $this->assertEquals(2, count($result));
